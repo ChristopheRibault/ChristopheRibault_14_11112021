@@ -1,8 +1,23 @@
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { CreateEmployeeForm } from '../components';
+
 const HomePage = function() {
+
+  const PageWrapper = styled.main`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1em;
+  `;
+
   return (
-    <div>
-      Home page
-    </div>
+    <PageWrapper>
+      <h1>HRnet</h1>
+      <Link to='/employees'>View current employees</Link>
+      <h2>Create Employee</h2>
+      <CreateEmployeeForm />
+    </PageWrapper>
   );
 };
 
