@@ -1,20 +1,26 @@
 import { useState } from 'react';
 import { useAsyncDebounce } from 'react-table';
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+display: flex;
+align-items: center;
+gap: .5em;
+color: #888;
+`;
 
 function SearchInput({
-  preGlobalFilteredRows,
   globalFilter,
   setGlobalFilter,
 }) {
-  const count = preGlobalFilteredRows.length;
   const [ value, setValue ] = useState(globalFilter);
   const onChange = useAsyncDebounce(value => {
     setGlobalFilter(value || undefined);
   }, 200);
 
   return(
-    <div>
-      <label htmlFor='searchInput'>Search : </label>
+    <Wrapper>
+      <label htmlFor='searchInput'>Search :</label>
       <input
         id='search-input'
         value={value || ''}
@@ -22,12 +28,11 @@ function SearchInput({
           setValue(e.target.value);
           onChange(e.target.value);
         }}
-        placeholder={`${count} records...`}
         style={{
           fontSize: '1.1rem',
         }}
       />
-    </div>
+    </Wrapper>
   );
 };
 
