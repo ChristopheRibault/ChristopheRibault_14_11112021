@@ -9,6 +9,8 @@ const TableWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1em;
+  min-width: 600px;
+  width: 80%;
 `;
 
 const OptionsWrapper = styled.div`
@@ -16,6 +18,33 @@ const OptionsWrapper = styled.div`
   justify-content: space-between;
   width: 100%;
   align-items: center;
+`;
+
+const StyledTable = styled.table`
+  border-collapse: collapse;
+  border-bottom: 1px solid black;
+
+  & > thead {
+    border-bottom: 1px solid black;
+  }
+
+  & tr {
+    height: 40px;
+  }
+
+  & td {
+    padding: 5px;
+  }
+
+  tbody tr:nth-child(odd) {
+    background-color: #fff;
+  }
+  
+  tbody tr:nth-child(even) {
+    background-color: #eee;
+    border-bottom: #ccc solid 1px;
+    border-top: #ccc solid 1px;
+  }
 `;
 
 const EmployeesTable = function() {
@@ -63,7 +92,7 @@ const EmployeesTable = function() {
           globalFilter={globalFilter}
         />
       </OptionsWrapper>
-      <table {...getTableProps()}>
+      <StyledTable {...getTableProps()}>
         <thead>
           {
             headerGroups.map(headerGroup => (
@@ -102,7 +131,7 @@ const EmployeesTable = function() {
             })
           }
         </tbody>
-      </table>
+      </StyledTable>
       <OptionsWrapper>
         <Pagination
           pageIndex={pageIndex}
