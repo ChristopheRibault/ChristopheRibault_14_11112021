@@ -23,7 +23,10 @@ const FormInput = function({
       onChange={handleChange}
     >
       {!!selectItems?.length && selectItems?.map(item => (
-        <option key={item}>{item}</option>
+        <option
+          key={item.value || item}
+          value={item.value || item}
+        >{item.text || item}</option>
       ))}
     </select> :
     <input 
