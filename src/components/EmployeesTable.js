@@ -1,22 +1,20 @@
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { useTable, useSortBy, usePagination } from 'react-table';
+import { useTable, useSortBy, usePagination, useGlobalFilter } from 'react-table';
 import { TableComponents } from '.';
 import tableColumns from '../data/tableColumns.json';
 
 const EmployeesTable = function() {
   const employees = useSelector(state => state.employees);
-  const { ShowSelect, Pagination, PageNavigation } = TableComponents;
+  const { 
+    ShowSelect,
+    Pagination,
+    PageNavigation,
+    SearchInput,
+  } = TableComponents;
 
-  const data = useMemo(
-    () => employees,
-    [employees],
-  );
-
-  const columns = useMemo(
-    () => tableColumns,
-    [],
-  );
+  const data = useMemo(() => employees, [employees]);
+  const columns = useMemo(() => tableColumns, []);
 
   const {
     getTableProps,
@@ -25,15 +23,18 @@ const EmployeesTable = function() {
     prepareRow,
     pageOptions,
     page,
-    state: { pageIndex, pageSize },
+    state: { pageIndex, pageSize, globalFilter },
     gotoPage,
     previousPage,
     nextPage,
     setPageSize,
     canPreviousPage,
     canNextPage,
+    preGlobalFilteredRows,
+    setGlobalFilter,
   } = useTable(
     { columns, data },
+    useGlobalFilter,
     useSortBy,
     usePagination,
   );
@@ -42,6 +43,11 @@ const EmployeesTable = function() {
   return (
     <>
       <ShowSelect pageSize={pageSize} setPageSize={setPageSize}/>
+      <SearchInput
+        preGlobalFilteredRows={preGlobalFilteredRows}
+        setGlobalFilter={setGlobalFilter}
+        globalFilter={globalFilter}
+      />
       <table {...getTableProps()}>
         <thead>
           {
