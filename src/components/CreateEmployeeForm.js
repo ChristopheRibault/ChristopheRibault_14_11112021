@@ -1,86 +1,124 @@
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { useForm } from '../utils/hooks';
+import * as employeesActions from '../features/employees.feature';
+import { FormInput } from '.';
+
+const StyledForm = styled.form`
+display: flex;
+flex-direction: column;
+gap: 1em;
+max-width: 400px;
+`;
+
+const FieldSetWrapper = styled.fieldset`
+display: flex;
+flex-direction: column;
+gap: 1em;
+`;
+
+const StyledBtn = styled.button`
+width: 80px;
+align-self: center;
+`;
 
 const CreateEmployeeForm = function() {
 
-  const StyledForm = styled.form`
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-    max-width: 400px;
-  `;
+  const dispatch = useDispatch();
+  const { values, handleChange, handleSubmit } = useForm(() => {
+    dispatch(employeesActions.add(values));
+  });
 
-  const InputWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    max-width: 250px;
-  `;
-
-  const FieldSetWrapper = styled.fieldset`
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-  `;
-
-  const StyledBtn = styled.button`
-    width: 80px;
-    align-self: center;
-  `;
+  const inputs = [
+    {
+      name: 'firstName',
+      label: 'First Name',
+    },
+    {
+      name: 'lastName',
+      label: 'Last Name',
+    },
+    {
+      name: 'birthDate',
+      label: 'Date of Birth',
+    },
+    {
+      name: 'startDate',
+      label: 'Start Date',
+    },
+    {
+      name: 'address',
+      type: 'fieldset',
+      items: [
+        {
+          name: 'street',
+          label: 'Street',
+        },
+        {
+          name: 'city',
+          label: 'City',
+        },
+        {
+          name: 'state',
+          label: 'State',
+          type: 'select',
+          selectItems: [],
+        },
+        {
+          name: 'zip',
+          label: 'Zip Code',
+        },
+      ],
+    },
+    {
+      name: 'department',
+      label: 'Department',
+      type: 'select',
+      selectItems: [
+        'Sales',
+        'Marketing',
+        'Engineering',
+        'Human Resources',
+        'Legal',
+      ],
+    },
+  ];
 
   return (
-    <StyledForm action="#" id="create-employee">
-      <InputWrapper>
-        <label for="first-name">First Name</label>
-        <input type="text" id="first-name" />
-      </InputWrapper>
+    <StyledForm onSubmit={handleSubmit} id="create-employee">
+      {
+        inputs.map(input => {
+          if (input.type === 'fieldset') {
+            return (
+              <FieldSetWrapper key={input.name}>
+                <legend>{input.name}</legend>
+                {input.items.map(item => (
+                  <FormInput
+                    key={item.name}
+                    name={item.name}
+                    handleChange={handleChange}
+                    value={values[item.name]}
+                    label={item.label}
+                    type={item.type}
+                    selectItems={item.selectItems}
+                  />
+                ))}
+              </FieldSetWrapper>
+            );
+          } else {
+            return <FormInput
+              key={input.name}
+              name={input.name}
+              handleChange={handleChange}
+              value={values[input.name]}
+              label={input.label}
+              type={input.type}
+              selectItems={input.selectItems}
+            />;
+          }
+        })
+      }
 
-      <InputWrapper>
-        <label for="last-name">Last Name</label>
-        <input type="text" id="last-name" />
-      </InputWrapper>
-
-      <InputWrapper>
-        <label for="date-of-birth">Date of Birth</label>
-        <input id="date-of-birth" type="text" />
-      </InputWrapper>
-
-      <InputWrapper>
-        <label for="start-date">Start Date</label>
-        <input id="start-date" type="text" />
-      </InputWrapper>
-
-      <FieldSetWrapper className="address">
-        <legend>Address</legend>
-        <InputWrapper>
-          <label for="street">Street</label>
-          <input id="street" type="text" />
-        </InputWrapper>
-
-        <InputWrapper>
-          <label for="city">City</label>
-          <input id="city" type="text" />
-        </InputWrapper>
-
-        <InputWrapper>
-          <label for="state">State</label>
-          <select name="state" id="state"></select>
-        </InputWrapper>
-
-        <InputWrapper>
-          <label for="zip-code">Zip Code</label>
-          <input id="zip-code" type="number" />
-        </InputWrapper>
-      </FieldSetWrapper>
-
-      <InputWrapper>
-        <label for="department">Department</label>
-        <select name="department" id="department">
-            <option>Sales</option>
-            <option>Marketing</option>
-            <option>Engineering</option>
-            <option>Human Resources</option>
-            <option>Legal</option>
-        </select>
-      </InputWrapper>
       <StyledBtn type='submit'>Save</StyledBtn>
 
     </StyledForm>
