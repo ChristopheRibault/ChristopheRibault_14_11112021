@@ -1,10 +1,15 @@
 import styled from 'styled-components';
+import { Select, MenuItem } from '@mui/material';
 import DatePicker from '@tof28/react-datepicker';
 
 const InputWrapper = styled.div`
 display: flex;
 flex-direction: column;
 max-width: 250px;
+`;
+
+const StyledSelect = styled(Select)`
+  height: 25px;
 `;
 
 const FormInput = function({ 
@@ -21,19 +26,19 @@ const FormInput = function({
   switch (type) {
     case 'select':
       input = 
-        <select
+        <StyledSelect
           name={name}
           value={value}
           id={name}
           onChange={handleChange}
         >
           {!!selectItems?.length && selectItems?.map(item => (
-            <option
+            <MenuItem
               key={item.value || item}
               value={item.value || item}
-            >{item.text || item}</option>
+            >{item.text || item}</MenuItem>
           ))}
-        </select>;
+        </StyledSelect>;
       break;
 
     case 'datepickr':
