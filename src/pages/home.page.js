@@ -12,7 +12,7 @@ margin: 1em;
 const HomePage = function() {
 
   return (
-    <PageWrapper>
+    <PageWrapper id='HomePage'>
       <h1>HRnet</h1>
       <Link to='/employees'>View current employees</Link>
       <h2>Create Employee</h2>

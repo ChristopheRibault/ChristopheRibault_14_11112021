@@ -1,9 +1,15 @@
 import styled from 'styled-components';
+import { Select, MenuItem } from '@mui/material';
+import DatePicker from '@tof28/react-datepicker';
 
 const InputWrapper = styled.div`
 display: flex;
 flex-direction: column;
 max-width: 250px;
+`;
+
+const StyledSelect = styled(Select)`
+  height: 25px;
 `;
 
 const FormInput = function({ 
@@ -15,27 +21,46 @@ const FormInput = function({
   selectItems,
 }) {
 
-  const input = type === 'select' ?
-    <select
-      name={name}
-      value={value}
-      id={name}
-      onChange={handleChange}
-    >
-      {!!selectItems?.length && selectItems?.map(item => (
-        <option
-          key={item.value || item}
-          value={item.value || item}
-        >{item.text || item}</option>
-      ))}
-    </select> :
-    <input 
-      name={name}
-      value={value || ''}
-      type={type}
-      id={name}
-      onChange={handleChange}
-    />;
+  let input;
+
+  switch (type) {
+    case 'select':
+      input = 
+        <StyledSelect
+          name={name}
+          value={value}
+          id={name}
+          onChange={handleChange}
+        >
+          {!!selectItems?.length && selectItems?.map(item => (
+            <MenuItem
+              key={item.value || item}
+              value={item.value || item}
+            >{item.text || item}</MenuItem>
+          ))}
+        </StyledSelect>;
+      break;
+
+    case 'datepickr':
+      input = 
+        <DatePicker
+          name={name}
+          selected={new Date()}
+          onChange={handleChange}
+        />;
+      break;
+
+    default:
+      input = 
+      <input 
+        name={name}
+        value={value || ''}
+        type={type}
+        id={name}
+        onChange={handleChange}
+      />;
+      break;
+  }
 
   return(
     <InputWrapper>

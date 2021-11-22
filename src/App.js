@@ -20,20 +20,20 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div className='App'>
-        <Router>
-          <Switch>
-            <Route 
-              exact
-              path='/'
-              component={HomePage}
-            />
-            <Route
-              path='/employees'
-              component={EmployeesPage}
-            />
-          </Switch>
-        </Router>
+    <div className='App' id='App'>
+      <Router>
+        <Switch>
+          <Route 
+            exact
+            path='/'
+            component={HomePage}
+          />
+          <Route
+            path='/employees'
+            component={EmployeesPage}
+          />
+        </Switch>
+      </Router>
     </div>
   );
 }

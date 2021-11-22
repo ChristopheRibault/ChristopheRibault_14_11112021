@@ -9,11 +9,13 @@
   },
   {
     "name": "birthDate",
-    "label": "Date of Birth"
+    "label": "Date of Birth",
+    "type": "datepickr"
   },
   {
     "name": "startDate",
-    "label": "Start Date"
+    "label": "Start Date",
+    "type": "datepickr"
   },
   {
     "name": "address",
