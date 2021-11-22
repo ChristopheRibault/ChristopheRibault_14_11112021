@@ -38,19 +38,11 @@ const FormInput = function({
 
     case 'datepickr':
       input = 
-      <>
-        <input
-          name={name}
-          value={value || ''}
-          type={type}
-          id={name}
-          onChange={handleChange}
-        />
         <DatePicker
-          selected={new Date('1980', 2, 12)}
-          onChange={(date) => console.log(date)}
-        />
-      </>;
+          name={name}
+          selected={new Date()}
+          onChange={handleChange}
+        />;
       break;
 
     default:
