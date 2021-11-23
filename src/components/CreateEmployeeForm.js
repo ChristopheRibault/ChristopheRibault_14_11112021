@@ -75,26 +75,20 @@ const CreateEmployeeForm = function() {
                 <legend>{input.name}</legend>
                 {input.items.map(item => (
                   <FormInput
+                    inputData={item}
                     key={item.name}
-                    name={item.name}
                     handleChange={handleChange}
                     value={values[item.name]}
-                    label={item.label}
-                    type={item.type}
-                    selectItems={item.selectItems}
                   />
                 ))}
               </FieldSetWrapper>
             );
           } else {
             return <FormInput
+              inputData={input}
               key={input.name}
-              name={input.name}
               handleChange={handleChange}
               value={values[input.name]}
-              label={input.label}
-              type={input.type}
-              selectItems={input.selectItems}
             />;
           }
         })

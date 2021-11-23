@@ -12,14 +12,20 @@ const StyledSelect = styled(Select)`
   height: 25px;
 `;
 
-const FormInput = function({ 
-  name,
+const FormInput = function({
+  inputData,
   handleChange,
   value,
-  label,
-  type = 'text',
-  selectItems,
 }) {
+
+  const {
+    name,
+    label,
+    type = 'text',
+    selectItems,
+    required,
+    pattern,
+  } = inputData;
 
   let input;
 
@@ -28,9 +34,11 @@ const FormInput = function({
       input = 
         <StyledSelect
           name={name}
-          value={value}
+          value={value || selectItems[0]?.value || selectItems[0] || ''}
           id={name}
           onChange={handleChange}
+          required={required}
+          pattern={pattern}
         >
           {!!selectItems?.length && selectItems?.map(item => (
             <MenuItem
@@ -47,6 +55,8 @@ const FormInput = function({
           name={name}
           selected={new Date()}
           onChange={handleChange}
+          required={required}
+          pattern={pattern}
         />;
       break;
 
@@ -58,6 +68,8 @@ const FormInput = function({
         type={type}
         id={name}
         onChange={handleChange}
+        required={required}
+        pattern={pattern}
       />;
       break;
   }
