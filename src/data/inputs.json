@@ -2,12 +2,14 @@
   {
     "name": "firstName",
     "label": "First Name",
-    "required": true
+    "required": true,
+    "pattern": "[a-zA-Z]{2,255}"
   },
   {
     "name": "lastName",
     "label": "Last Name",
-    "required": true
+    "required": true,
+    "pattern": "[a-zA-Z]{2,255}"
   },
   {
     "name": "birthDate",
@@ -29,12 +31,14 @@
       {
         "name": "street",
         "label": "Street",
-        "required": true
+        "required": true,
+        "pattern": "[a-zA-Z]{2,255}"
       },
       {
         "name": "city",
         "label": "City",
-        "required": true
+        "required": true,
+        "pattern": "[a-zA-Z]{2,255}"
       },
       {
         "name": "state",
@@ -284,7 +288,8 @@
       {
         "name": "zip",
         "label": "Zip Code",
-        "required": true
+        "required": true,
+        "pattern": "[0-9]{4,5}"
       }
     ]
   },
