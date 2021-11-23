@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
 import Modal from 'react-modal';
+import { useDispatch } from 'react-redux';
+import styled from 'styled-components';
+
 import { useForm } from '../utils/hooks';
 import * as employeesActions from '../features/employees.feature';
 import { FormInput } from '.';
+
 import inputs from '../data/inputs.json';
 
 const StyledForm = styled.form`
@@ -62,6 +64,7 @@ const CreateEmployeeForm = function() {
   const [ modalIsOpen, setModalIsOpen ] = useState(false);
   
   const { values, handleChange, handleSubmit } = useForm(() => {
+    setModalIsOpen(true);
     dispatch(employeesActions.add(values));
   });
 
@@ -75,26 +78,20 @@ const CreateEmployeeForm = function() {
                 <legend>{input.name}</legend>
                 {input.items.map(item => (
                   <FormInput
+                    inputData={item}
                     key={item.name}
-                    name={item.name}
                     handleChange={handleChange}
                     value={values[item.name]}
-                    label={item.label}
-                    type={item.type}
-                    selectItems={item.selectItems}
                   />
                 ))}
               </FieldSetWrapper>
             );
           } else {
             return <FormInput
+              inputData={input}
               key={input.name}
-              name={input.name}
               handleChange={handleChange}
               value={values[input.name]}
-              label={input.label}
-              type={input.type}
-              selectItems={input.selectItems}
             />;
           }
         })
@@ -112,7 +109,9 @@ const CreateEmployeeForm = function() {
         >X</ModalButton>
       </Modal>
 
-      <StyledBtn type='submit' onClick={() => setModalIsOpen(true)}>Save</StyledBtn>
+      <StyledBtn
+        type='submit'
+      >Save</StyledBtn>
 
     </StyledForm>
   );

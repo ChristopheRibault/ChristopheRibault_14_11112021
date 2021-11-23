@@ -1,21 +1,28 @@
 [
   {
     "name": "firstName",
-    "label": "First Name"
+    "label": "First Name",
+    "required": true,
+    "pattern": "[a-zA-Z]{2,255}"
   },
   {
     "name": "lastName",
-    "label": "Last Name"
+    "label": "Last Name",
+    "required": true,
+    "pattern": "[a-zA-Z]{2,255}"
   },
   {
     "name": "birthDate",
     "label": "Date of Birth",
-    "type": "datepickr"
+    "type": "datepickr",
+    "required": true
+
   },
   {
     "name": "startDate",
     "label": "Start Date",
-    "type": "datepickr"
+    "type": "datepickr",
+    "required": true
   },
   {
     "name": "address",
@@ -23,16 +30,21 @@
     "items": [
       {
         "name": "street",
-        "label": "Street"
+        "label": "Street",
+        "required": true,
+        "pattern": "[a-zA-Z]{2,255}"
       },
       {
         "name": "city",
-        "label": "City"
+        "label": "City",
+        "required": true,
+        "pattern": "[a-zA-Z]{2,255}"
       },
       {
         "name": "state",
         "label": "State",
         "type": "select",
+        "required": true,
         "selectItems": [
           {
               "text": "Alabama",
@@ -275,7 +287,9 @@
       },
       {
         "name": "zip",
-        "label": "Zip Code"
+        "label": "Zip Code",
+        "required": true,
+        "pattern": "[0-9]{4,5}"
       }
     ]
   },
@@ -283,6 +297,7 @@
     "name": "department",
     "label": "Department",
     "type": "select",
+    "required": true,
     "selectItems": [
       "Sales",
       "Marketing",
