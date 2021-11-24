@@ -49,7 +49,7 @@ const FormInput = function({
         </StyledSelect>;
       break;
 
-    case 'datepickr':
+    case 'datepicker':
       input = 
         <DatePicker
           name={name}
