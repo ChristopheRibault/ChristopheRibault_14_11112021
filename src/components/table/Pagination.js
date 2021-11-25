@@ -6,8 +6,8 @@ const Wrapper = styled.div`
 
 const Pagination = function({ count, page }) {
 
-  const first = Number(page[0]?.id) + 1;
-  const last = Number(page[page.length-1]?.id) + 1;
+  const first = Number(page[0]?.id || -1) + 1;
+  const last = Number(page[page.length-1]?.id || -1) + 1;
 
   return (
     <Wrapper>

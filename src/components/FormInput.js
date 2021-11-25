@@ -34,7 +34,7 @@ const FormInput = function({
       input = 
         <StyledSelect
           name={name}
-          value={value || selectItems[0]?.value || selectItems[0] || ''}
+          value={value || ''}
           id={name}
           onChange={handleChange}
           required={required}
@@ -49,7 +49,7 @@ const FormInput = function({
         </StyledSelect>;
       break;
 
-    case 'datepickr':
+    case 'datepicker':
       input = 
         <DatePicker
           name={name}

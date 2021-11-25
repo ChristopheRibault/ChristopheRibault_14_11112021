@@ -14,14 +14,14 @@
   {
     "name": "birthDate",
     "label": "Date of Birth",
-    "type": "datepickr",
+    "type": "datepicker",
     "required": true
 
   },
   {
     "name": "startDate",
     "label": "Start Date",
-    "type": "datepickr",
+    "type": "datepicker",
     "required": true
   },
   {
